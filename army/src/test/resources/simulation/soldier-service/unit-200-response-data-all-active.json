@@ -1,0 +1,20 @@
+[
+  {
+    "id":"1",
+    "name":"Unit 1",
+    "description":"Unit 1",
+    "active": true
+  },
+  {
+    "id":"2",
+    "name":"Unit 2",
+    "description":"Unit 2",
+    "active": true
+  },
+  {
+    "id":"3",
+    "name":"Unit 3",
+    "description":"Unit 3",
+    "active": true
+  }
+]

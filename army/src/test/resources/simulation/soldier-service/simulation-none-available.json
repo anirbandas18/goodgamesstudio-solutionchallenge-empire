@@ -1,0 +1,52 @@
+{
+  "data": {
+    "pairs": [
+      {
+        "request": {
+          "path": [
+            {
+              "matcher": "exact",
+              "value": "/soldier/unit"
+            }
+          ],
+          "method": [
+            {
+              "matcher": "exact",
+              "value": "GET"
+            }
+          ],
+          "destination": [
+            {
+              "matcher": "exact",
+              "value": "*"
+            }
+          ],
+          "scheme": [
+            {
+              "matcher": "exact",
+              "value": "http"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "bodyFile": "unit-400-response-data-none-available.json",
+          "encodedBody": false,
+          "headers": {
+            "Content-Type": ["application/problem+json"]
+          },
+          "templated": false
+        }
+      }
+    ],
+    "globalActions": {
+      "delays": [],
+      "delaysLogNormal": []
+    }
+  },
+  "meta": {
+    "schemaVersion": "v5",
+    "hoverflyVersion": "v1.3.1",
+    "timeExported": "2019-05-30T22:14:24+01:00"
+  }
+}

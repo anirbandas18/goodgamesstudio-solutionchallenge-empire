@@ -1,0 +1,26 @@
+package com.teenthofabud.solutionchallenge.goodgamestudios.empire.army.troop.data;
+
+import lombok.Getter;
+
+@Getter
+public enum TroopMessageTemplate {
+
+    MSG_TEMPLATE_SEARCHING_FOR_TROOP_ENTITY_ID("Searching for Troop Entity with id: {}"),
+    MSG_TEMPLATE_NO_TROOP_ENTITY_ID_AVAILABLE("No Troop Entity available with id: {}"),
+    MSG_TEMPLATE_FOUND_TROOP_ENTITY_ID("Found Troop Entity with id: {}"),
+    MSG_TEMPLATE_TROOP_ID_VALID("troop id: {} is semantically valid"),
+    MSG_TEMPLATE_TROOP_ID_INVALID("troop id: {} is invalid"),
+    MSG_TEMPLATE_TROOP_ID_EMPTY("troop id is empty"),
+    MSG_TEMPLATE_TROOP_CASCADE_LEVEL_EMPTY("troop cascadeLevel is empty"),
+    MSG_TEMPLATE_TROOP_EXISTENCE_BY_NAME ("Checking existence of Troop Entity with name: {}"),
+    MSG_TEMPLATE_TROOP_EXISTS_BY_NAME ("Troop Entity already exists with name: {}"),
+    MSG_TEMPLATE_TROOP_NON_EXISTENCE_BY_NAME ("No Troop Entity exists with name: {}");
+
+    private String value;
+
+    private TroopMessageTemplate(String value) {
+        this.value = value;
+    }
+
+
+}

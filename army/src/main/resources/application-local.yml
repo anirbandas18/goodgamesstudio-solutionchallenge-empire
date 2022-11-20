@@ -1,0 +1,97 @@
+eureka:
+    client:
+        enabled: ${ARMY_EUREKA_CLIENT_ENABLED}
+        initial-instance-info-replication-interval-seconds: 120
+        instance-info-replication-interval-seconds: 120
+        serviceUrl:
+            defaultZone: http://${ARMY_EUREKA_HOST}:${ARMY_EUREKA_PORT}/eureka
+            registerWithEureka: true
+    instance:
+        prefer-ip-address: true
+feign:
+    circuitbreaker:
+        enabled: true
+    client:
+        config:
+            default:
+                loggerLevel: ${ARMY_SOLDIER_FEIGN_LOGGING_LEVEL}
+            soldier-service:
+                connectTimeout: 250
+                loggerLevel: ${ARMY_SOLDIER_FEIGN_LOGGING_LEVEL}
+                readTimeout: 500
+info:
+    app:
+        description: '@project.description@'
+        encoding: '@project.build.sourceEncoding@'
+        java:
+            version: '@java.version@'
+        name: '@project.name@'
+        version: '@project.version@'
+logging:
+    level:
+        org:
+            hibernate:
+                SQL: ${ARMY_LOGGING_LEVEL}
+                type:
+                    descriptor:
+                        sql:
+                            BasicBinder: ${ARMY_LOGGING_LEVEL}
+management:
+    endpoint:
+        health:
+            show-details: always
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+emp:
+    army:
+        troop:
+            fields-to-escape:
+        description: '@project.description@'
+        dob:
+            format: dd-MM-yyyy
+        version: '@project.version@'
+        soldier:
+            service:
+                port: 8083
+                url: localhost:${army.soldier.service.port}
+server:
+    port: ${ARMY_SERVER_PORT}
+spring:
+    cloud:
+        discovery:
+            enabled: true
+        loadbalancer:
+            ribbon:
+                enabled: false
+        service-registry:
+            auto-registration:
+                enabled: true
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: ArMy
+        url: jdbc:mysql://${ARMY_DATABASE_HOST}:${ARMY_DATABASE_PORT}/emp_army_db
+        username: emp_army_manager
+    jpa:
+        hibernate:
+            ddl-auto: none
+        open-in-view: false
+        properties:
+            hibernate:
+                format_sql: true
+                jdbc:
+                    time_zone: UTC
+                show_sql: true
+                use_sql_comments: true
+    sleuth:
+        sampler:
+            percentage: 1.0
+        web:
+            skipPattern: (^cleanup.*|.+favicon.*)
+    zipkin:
+        baseUrl: http://${ARMY_ZIPKIN_HOST}:${ARMY_ZIPKIN_PORT}
+        enabled: false
+springdoc:
+    swagger-ui:
+        enabled: true

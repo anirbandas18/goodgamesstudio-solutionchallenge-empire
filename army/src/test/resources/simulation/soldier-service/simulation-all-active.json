@@ -1,0 +1,163 @@
+{
+  "data": {
+    "pairs": [
+      {
+        "request": {
+          "path": [
+            {
+              "matcher": "exact",
+              "value": "/soldier/unit/1"
+            }
+          ],
+          "method": [
+            {
+              "matcher": "exact",
+              "value": "GET"
+            }
+          ],
+          "destination": [
+            {
+              "matcher": "exact",
+              "value": "*"
+            }
+          ],
+          "scheme": [
+            {
+              "matcher": "exact",
+              "value": "http"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "bodyFile": "unit-200-response-data-id-1.json",
+          "encodedBody": false,
+          "headers": {
+            "Content-Type": ["application/json"]
+          },
+          "templated": false
+        }
+      },
+      {
+        "request": {
+          "path": [
+            {
+              "matcher": "exact",
+              "value": "/soldier/unit/2"
+            }
+          ],
+          "method": [
+            {
+              "matcher": "exact",
+              "value": "GET"
+            }
+          ],
+          "destination": [
+            {
+              "matcher": "exact",
+              "value": "*"
+            }
+          ],
+          "scheme": [
+            {
+              "matcher": "exact",
+              "value": "http"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "bodyFile": "unit-200-response-data-id-2.json",
+          "encodedBody": false,
+          "headers": {
+            "Content-Type": ["application/json"]
+          },
+          "templated": false
+        }
+      },
+      {
+        "request": {
+          "path": [
+            {
+              "matcher": "exact",
+              "value": "/soldier/unit/3"
+            }
+          ],
+          "method": [
+            {
+              "matcher": "exact",
+              "value": "GET"
+            }
+          ],
+          "destination": [
+            {
+              "matcher": "exact",
+              "value": "*"
+            }
+          ],
+          "scheme": [
+            {
+              "matcher": "exact",
+              "value": "http"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "bodyFile": "unit-200-response-data-id-3.json",
+          "encodedBody": false,
+          "headers": {
+            "Content-Type": ["application/json"]
+          },
+          "templated": false
+        }
+      },
+      {
+        "request": {
+          "path": [
+            {
+              "matcher": "exact",
+              "value": "/soldier/unit"
+            }
+          ],
+          "method": [
+            {
+              "matcher": "exact",
+              "value": "GET"
+            }
+          ],
+          "destination": [
+            {
+              "matcher": "exact",
+              "value": "*"
+            }
+          ],
+          "scheme": [
+            {
+              "matcher": "exact",
+              "value": "http"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "bodyFile": "unit-200-response-data-all-active.json",
+          "encodedBody": false,
+          "headers": {
+            "Content-Type": ["application/problem+json"]
+          },
+          "templated": false
+        }
+      }
+    ],
+    "globalActions": {
+      "delays": [],
+      "delaysLogNormal": []
+    }
+  },
+  "meta": {
+    "schemaVersion": "v5",
+    "hoverflyVersion": "v1.3.1",
+    "timeExported": "2019-05-30T22:14:24+01:00"
+  }
+}
