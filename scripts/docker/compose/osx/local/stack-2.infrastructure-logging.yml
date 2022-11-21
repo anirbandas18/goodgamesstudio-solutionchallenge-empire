@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+
+  tracing-service:
+    platform: linux/x86_64
+    image: openzipkin/zipkin
+    container_name: tracing-service
+    hostname: tracing-service
+    ports:
+      - 9411:9411
+    #networks:
+    #  s3export:
+    #    ipv4_address: 172.16.1.5
+
+#networks:
+#  s3export:
+#    external: true

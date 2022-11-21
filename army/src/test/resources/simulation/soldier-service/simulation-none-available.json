@@ -30,7 +30,7 @@
         },
         "response": {
           "status": 200,
-          "bodyFile": "unit-400-response-data-none-available.json",
+          "bodyFile": "unit-200-response-data-none-available.json",
           "encodedBody": false,
           "headers": {
             "Content-Type": ["application/problem+json"]

@@ -77,7 +77,7 @@ spring:
             skipPattern: (^cleanup.*|.+favicon.*)
     zipkin:
         baseUrl: http://${SOLDIER_ZIPKIN_HOST}:${SOLDIER_ZIPKIN_PORT}
-        enabled: false
+        enabled: ${SOLDIER_ZIPKIN_CLIENT_ENABLED}
 springdoc:
     swagger-ui:
-        enabled: true
+        enabled: ${SOLDIER_SWAGGER_ENABLED}

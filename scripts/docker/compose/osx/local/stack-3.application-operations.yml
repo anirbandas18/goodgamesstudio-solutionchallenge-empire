@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+
+  naming-service:
+    platform: linux/x86_64
+    image: empire/naming:1.0-SNAPSHOT
+    container_name: naming-service
+    hostname: naming-service
+    restart: on-failure
+    #volumes:
+    #  - $HOME/ionos-coding-challenge/s3export-tool/naming-service:/opt/ionos-javatestaufgabe-s3export/s3export-naming-service
+    ports:
+      - 8761:8761
+    #networks:
+    #  s3export:
+    #    ipv4_address: 172.16.1.6
+    environment:
+      - LOGSTASH_ENABLED=false
+      - LOGBACK_LOGGING_LEVEL=info
+      - LOGSTASH_HOST=localhost
+      - LOGSTASH_PORT=4560
+      - PORT=8761
+
+  #configuration-service:
+  #  platform: linux/x86_64
+  #  image: empire/configuration:1.0-SNAPSHOT
+  #  container_name: configuration-service
+  #  hostname: configuration-service
+  #  restart: on-failure
+    #volumes:
+    #  - $HOME/ionos-coding-challenge/s3export-tool/configuration-service:/opt/ionos-javatestaufgabe-s3export/s3export-configuration-service
+  #  ports:
+      - 8888:8888
+    #networks:
+    #  s3export:
+    #    ipv4_address: 172.16.1.7
+  #  environment:
+  #    - LOGSTASH_ENABLED=false
+  #    - LOGGING_LEVEL=info
+  #    - LOGSTASH_HOST=localhost
+  #    - LOGSTASH_PORT=4560
+  #    - EUREKA_CLIENT_ENABLED=false
+  #    - EUREKA_HOST=naming-service
+  #    - EUREKA_PORT=8761
+
+#networks:
+#  s3export:
+#    external: true

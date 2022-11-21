@@ -80,6 +80,9 @@ spring:
                 enabled: true
     main:
         web-application-type: reactive
+    zipkin:
+        baseUrl: http://${GATEWAY_ZIPKIN_HOST}:${GATEWAY_ZIPKIN_PORT}
+        enabled: ${GATEWAY_ZIPKIN_CLIENT_ENABLED}
 springdoc:
     swagger-ui:
         enabled: ${GATEWAY_SWAGGER_ENABLED}

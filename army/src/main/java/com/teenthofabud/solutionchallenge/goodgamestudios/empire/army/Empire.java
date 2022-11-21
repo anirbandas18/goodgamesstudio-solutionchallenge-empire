@@ -12,7 +12,7 @@ public class Empire {
     public static void main(String[] args) {
         Empire t = new Empire();
         for (int i = 1 ; i <= 100 ; i++) {
-            log.info("{}: {}", i, t.getParts(3, 3));
+            log.info("{}: {}", i, t.getParts(2, 3));
         }
     }
 
@@ -22,7 +22,7 @@ public class Empire {
 
     private List<Integer> getParts(int strength, int division) {
         List<Integer> parts = new LinkedList<>();
-        if(strength >= division) {
+        //if(strength >= division) {
             int sum = 0;
             for(int i = 0 ; i < division - 1 ; i++) {
                 int limit = strength - sum - division + 1 + i;
@@ -32,7 +32,7 @@ public class Empire {
                 parts.add(n);
             }
             parts.add(strength - sum);
-        }
+        //}
         return parts;
     }
 

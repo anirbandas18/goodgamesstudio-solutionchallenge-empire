@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+
+  gateway:
+    platform: linux/x86_64
+    image: empire/gateway:1.0-SNAPSHOT
+    container_name: gateway-service
+    hostname: gateway-service
+    restart: on-failure
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=development
+      - SPRING_CLOUD_CONFIG_ENABLED=true
+      - LOGSTASH_ENABLED=false
+      - LOGSTASH_HOST=localhost
+      - LOGSTASH_PORT=4560
+      - SPRING_CLOUD_CONFIG_HOST=configuration-service
+      - SPRING_CLOUD_CONFIG_PORT=8888
+      - LOGBACK_LOGGING_LEVEL=INFO
+
+  soldier:
+    platform: linux/x86_64
+    image: empire/soldier:1.0-SNAPSHOT
+    container_name: soldier-service
+    hostname: soldier-service
+    restart: on-failure
+    ports:
+      - "11001:11001"
+    environment:
+      - SPRING_PROFILES_ACTIVE=development
+      - LOGSTASH_ENABLED=false
+      - SPRING_CLOUD_CONFIG_ENABLED=true
+      - LOGSTASH_HOST=localhost
+      - LOGSTASH_PORT=4560
+      - SPRING_CLOUD_CONFIG_HOST=configuration-service
+      - SPRING_CLOUD_CONFIG_PORT=8888
+      - LOGBACK_LOGGING_LEVEL=INFO
+
+  army:
+    platform: linux/x86_64
+    image: empire/army:1.0-SNAPSHOT
+    container_name: army-service
+    hostname: army-service
+    restart: on-failure
+    ports:
+      - "17001:17001"
+    environment:
+      - SPRING_PROFILES_ACTIVE=development
+      - LOGSTASH_ENABLED=false
+      - LOGBACK_LOGGING_LEVEL=INFO
+      - SPRING_CLOUD_CONFIG_ENABLED=true
+      - LOGSTASH_HOST=localhost
+      - LOGSTASH_PORT=4560
+      - SPRING_CLOUD_CONFIG_HOST=configuration-service
+      - SPRING_CLOUD_CONFIG_PORT=8888

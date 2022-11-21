@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+
+  rdbms-service:
+    platform: linux/x86_64
+    image: mysql:8.0.31
+    container_name: rdbms-service
+    hostname: rdbms-service
+    restart: always
+    user: mysql
+    command: --default-authentication-plugin=mysql_native_password --init-file="/tmp/scripts/empire.sql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ../../../../database/MySQL:/tmp/scripts
+      - ../../../../database/MySQL/docker:/tmp/database
+    ports:
+      - "3306:3306"
+
+  tracing-service:
+    platform: linux/x86_64
+    image: openzipkin/zipkin
+    container_name: tracing-service
+    hostname: tracing-service
+    ports:
+      - "9411:9411"

@@ -37,7 +37,7 @@ public class TroopController {
 
     private TroopService service;
 
-    @Operation(summary = "Create new Troop details by id")
+    @Operation(summary = "Create new Troop with strength")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "List of created troops order by quantity descending and unit alphabetically",
                     content = { @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = TroopVo.class))) }),

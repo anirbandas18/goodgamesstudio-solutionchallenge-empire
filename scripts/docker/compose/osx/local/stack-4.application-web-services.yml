@@ -1,0 +1,124 @@
+version: "3.9"
+
+services:
+
+  gateway:
+    platform: linux/x86_64
+    image: empire/gateway:1.0-SNAPSHOT
+    container_name: gateway-service
+    hostname: gateway-service
+    restart: on-failure
+    #volumes:
+    #  - $HOME/ionos-coding-challenge/tool/gateway:/opt/ionos-javatestaufgabe-s3export/gateway-service
+    ports:
+      - 8083:8083
+    #networks:
+    #  s3export:
+    #    ipv4_address: 172.16.1.8
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+      - SPRING_CLOUD_CONFIG_ENABLED=false
+      - ZIPKIN_CLIENT_ENABLED=true
+      #- LOGBACK_LOGGING_LEVEL=info
+      - LOGSTASH_ENABLED=false
+      - LOGSTASH_HOST=localhost
+      - LOGSTASH_PORT=4560
+      - SPRING_CLOUD_CONFIG_HOST=172.16.1.7
+      - SPRING_CLOUD_CONFIG_PORT=8888
+      - LOGBACK_LOGGING_LEVEL=INFO
+      #- EUREKA_HOST=172.16.1.6
+      - PORT=8083
+      - EUREKA_CLIENT_ENABLED=true
+      - SWAGGER_ENABLED=true
+      - EUREKA_HOST=naming-service
+      - EUREKA_PORT=8761
+      #- ZIPKIN_HOST=172.16.1.5
+      - ZIPKIN_HOST=tracing-service
+      - ZIPKIN_PORT=9411
+
+  soldier:
+    platform: linux/x86_64
+    image: empire/soldier:1.0-SNAPSHOT
+    container_name: soldier-service
+    hostname: soldier-service
+    restart: on-failure
+    #volumes:
+    #  - $HOME/ionos-coding-challenge/tool/soldier:/opt/ionos-javatestaufgabe-s3export/soldier-service
+    ports:
+      - 11001:11001
+    #networks:
+    #  s3export:
+    #    ipv4_address: 172.16.1.9
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+      - EUREKA_CLIENT_ENABLED=true
+      - ZIPKIN_CLIENT_ENABLED=true
+      - SWAGGER_ENABLED=true
+      - LOGSTASH_ENABLED=false
+      - LOGBACK_LOGGING_LEVEL=info
+      - SPRING_CLOUD_CONFIG_ENABLED=false
+      - LOGSTASH_HOST=localhost
+      - LOGSTASH_PORT=4560
+      - SPRING_CLOUD_CONFIG_HOST=172.16.1.7
+      - SPRING_CLOUD_CONFIG_PORT=8888
+      - LOGBACK_LOGGING_LEVEL=INFO
+      #- DATABASE_HOST=172.16.1.2
+      - DATABASE_HOST=rdbms-service
+      - DATABASE_PORT=3306
+      #- EUREKA_HOST=172.16.1.6
+      - EUREKA_HOST=naming-service
+      - EUREKA_PORT=8761
+      #- ZIPKIN_HOST=172.16.1.5
+      - ZIPKIN_HOST=tracing-service
+      - ZIPKIN_PORT=9411
+      #- GATEWAY_HOST=localhost
+      - GATEWAY_HOST=gateway-service
+      - GATEWAY_PORT=8083
+      - PORT=11001
+
+  army:
+    platform: linux/x86_64
+    image: empire/army:1.0-SNAPSHOT
+    container_name: army-service
+    hostname: army-service
+    restart: on-failure
+    #volumes:
+    #  - $HOME/ionos-coding-challenge/tool/army:/opt/ionos-javatestaufgabe-s3export/army-service
+    ports:
+      - 17001:17001
+    #networks:
+    #  s3export:
+    #    ipv4_address: 172.16.1.10
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+      - EUREKA_CLIENT_ENABLED=true
+      - ZIPKIN_CLIENT_ENABLED=true
+      - SWAGGER_ENABLED=true
+      - LOGSTASH_ENABLED=false
+      - LOGBACK_LOGGING_LEVEL=info
+      - SPRING_CLOUD_CONFIG_ENABLED=false
+      - LOGSTASH_HOST=localhost
+      - LOGSTASH_PORT=4560
+      - SPRING_CLOUD_CONFIG_HOST=localhost
+      - SPRING_CLOUD_CONFIG_PORT=8888
+      - LOGBACK_LOGGING_LEVEL=INFO
+      #- DATABASE_HOST=localhost
+      - DATABASE_HOST=rdbms-service
+      - DATABASE_PORT=3306
+      #- EUREKA_HOST=localhost
+      - EUREKA_HOST=naming-service
+      - EUREKA_PORT=8761
+      #- ZIPKIN_HOST=localhost
+      - ZIPKIN_HOST=tracing-service
+      - ZIPKIN_PORT=9411
+      #- GATEWAY_HOST=localhost
+      - GATEWAY_HOST=gateway-service
+      - GATEWAY_PORT=8083
+      - PORT=17001
+      - FEIGN_LOGGING_LEVEL=basic
+      - SOLDIER_FEIGN_LOGGING_LEVEL=basic
+      - CIRCUIT_BREAKER_ENABLED=true
+
+#networks:
+#  s3export:
+#    external: true

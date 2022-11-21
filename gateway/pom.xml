@@ -70,21 +70,6 @@
     </build>
 
     <dependencies>
-        <!--        <dependency>-->
-        <!--            <groupId>com.teenthofabud.core.common</groupId>-->
-        <!--            <artifactId>toab-chassis-sdk</artifactId>-->
-        <!--            <version>${toab-chassis-sdk.version}</version>-->
-        <!--            <exclusions>-->
-        <!--                <exclusion>-->
-        <!--                    <groupId>org.springframework.boot</groupId>-->
-        <!--                    <artifactId>spring-boot-starter-data-mongodb</artifactId>-->
-        <!--                </exclusion>-->
-        <!--                <exclusion>-->
-        <!--                    <groupId>org.springframework.boot</groupId>-->
-        <!--                    <artifactId>spring-boot-starter-data-jpa</artifactId>-->
-        <!--                </exclusion>-->
-        <!--            </exclusions>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>

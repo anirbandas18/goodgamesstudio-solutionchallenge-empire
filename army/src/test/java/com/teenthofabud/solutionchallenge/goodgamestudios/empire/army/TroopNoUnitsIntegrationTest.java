@@ -23,7 +23,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -34,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ContextConfiguration(classes = { ArmyServiceApplication.class })
-public class TroopInactiveUnitsIntegrationTest extends ArmyIntegrationBaseTest {
+public class TroopNoUnitsIntegrationTest extends ArmyIntegrationBaseTest {
 
     private static final String TROOP_URI = "/troop";
 
@@ -60,13 +59,12 @@ public class TroopInactiveUnitsIntegrationTest extends ArmyIntegrationBaseTest {
     }
 
     @Test
-    public void test_Troop_Post_ShouldReturn_500Response_And_ErrorCode_EMP_ARMY_006_WhenPostedWith_MoreThanSufficient_ArmyStrength() throws Exception {
+    public void test_Troop_Post_ShouldReturn_400Response_And_ErrorCode_EMP_ARMY_001_WhenPostedWith_MoreThanSufficient_ArmyStrength() throws Exception {
         MvcResult mvcResult = null;
-        String errorCode = ArmyErrorCode.ARMY_ACTION_FAILURE.getErrorCode();
+        String errorCode = ArmyErrorCode.ARMY_ATTRIBUTE_INVALID.getErrorCode();
         List<UnitVo> unitVoList = soldierServiceClient.getAllUnitDetails();
         troopForm = new TroopForm(unitVoList.size() * 100);
         String fieldId = "strength";
-        String action = "creation";
 
         mvcResult = mockMvc.perform(post(TROOP_URI)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -75,20 +73,18 @@ public class TroopInactiveUnitsIntegrationTest extends ArmyIntegrationBaseTest {
                 .andReturn();
 
         Assertions.assertNotNull(mvcResult);
-        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), mvcResult.getResponse().getStatus());
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST.value(), mvcResult.getResponse().getStatus());
         Assertions.assertEquals(errorCode, om.readValue(mvcResult.getResponse().getContentAsString(), ErrorVo.class).getCode());
         Assertions.assertTrue(om.readValue(mvcResult.getResponse().getContentAsString(), ErrorVo.class).getMessage().contains(fieldId));
-        Assertions.assertTrue(om.readValue(mvcResult.getResponse().getContentAsString(), ErrorVo.class).getMessage().contains(action));
     }
 
     @Test
-    public void test_Troop_Post_ShouldReturn_500Response_And_ErrorCode_EMP_ARMY_006_WhenPostedWith_JustSufficient_ArmyStrength() throws Exception {
+    public void test_Troop_Post_ShouldReturn_400Response_And_ErrorCode_EMP_ARMY_001_WhenPostedWith_JustSufficient_ArmyStrength() throws Exception {
         MvcResult mvcResult = null;
-        String errorCode = ArmyErrorCode.ARMY_ACTION_FAILURE.getErrorCode();
+        String errorCode = ArmyErrorCode.ARMY_ATTRIBUTE_INVALID.getErrorCode();
         List<UnitVo> unitVoList = soldierServiceClient.getAllUnitDetails();
         troopForm = new TroopForm(unitVoList.size());
         String fieldId = "strength";
-        String action = "creation";
 
         mvcResult = mockMvc.perform(post(TROOP_URI)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -97,10 +93,9 @@ public class TroopInactiveUnitsIntegrationTest extends ArmyIntegrationBaseTest {
                 .andReturn();
 
         Assertions.assertNotNull(mvcResult);
-        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), mvcResult.getResponse().getStatus());
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST.value(), mvcResult.getResponse().getStatus());
         Assertions.assertEquals(errorCode, om.readValue(mvcResult.getResponse().getContentAsString(), ErrorVo.class).getCode());
         Assertions.assertTrue(om.readValue(mvcResult.getResponse().getContentAsString(), ErrorVo.class).getMessage().contains(fieldId));
-        Assertions.assertTrue(om.readValue(mvcResult.getResponse().getContentAsString(), ErrorVo.class).getMessage().contains(action));
     }
 
     @Test
@@ -135,6 +130,6 @@ public class TroopInactiveUnitsIntegrationTest extends ArmyIntegrationBaseTest {
 
     @Override
     public String[] getSimulationFilePaths() {
-        return new String[] { String.join("/", getSimulationBaseLocation(), "simulation-all-inactive.json") };
+        return new String[] { String.join("/", getSimulationBaseLocation(), "simulation-none-available.json") };
     }
 }

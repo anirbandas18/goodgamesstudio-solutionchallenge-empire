@@ -16,9 +16,9 @@ feign:
             default:
                 loggerLevel: ${ARMY_SOLDIER_FEIGN_LOGGING_LEVEL}
             soldier-service:
-                connectTimeout: 250
+                connectTimeout: 1000
                 loggerLevel: ${ARMY_SOLDIER_FEIGN_LOGGING_LEVEL}
-                readTimeout: 500
+                readTimeout: 2000
 info:
     app:
         description: '@project.description@'
@@ -54,8 +54,8 @@ emp:
         version: '@project.version@'
         soldier:
             service:
-                port: 8083
-                url: localhost:${army.soldier.service.port}
+                port: ${ARMY_GATEWAY_PORT}
+                url: ${ARMY_GATEWAY_HOST}:${emp.army.soldier.service.port}
 server:
     port: ${ARMY_SERVER_PORT}
 spring:
@@ -91,7 +91,7 @@ spring:
             skipPattern: (^cleanup.*|.+favicon.*)
     zipkin:
         baseUrl: http://${ARMY_ZIPKIN_HOST}:${ARMY_ZIPKIN_PORT}
-        enabled: false
+        enabled: ${ARMY_ZIPKIN_CLIENT_ENABLED}
 springdoc:
     swagger-ui:
-        enabled: true
+        enabled: ${ARMY_SWAGGER_ENABLED}
