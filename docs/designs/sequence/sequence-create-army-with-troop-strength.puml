@@ -1,0 +1,49 @@
+@startuml
+
+title Sequence - Empire Castle - Create Army With Troop Strength
+
+box "client"
+    actor User as U
+end box
+
+box "army-service"
+    boundary Army as A
+end box
+
+box "soldier-service"
+    collections Soldier as S
+end box
+
+box "rdbms-service"
+    collections ArmyDB as D
+end box
+
+alt TroopCntroller
+    U -> A: POST /troop [TroopForm]
+end
+alt TroopValidator
+    A -> A: validate TroopForm
+end
+alt SoldierServiceClient
+    A -> S: GET /soldier/unit
+    S -> A: List<UnitVo>
+end
+alt TroopMaker
+    A -> A: generateDivisions(TroopForm.strength, length(List<UnitVo>))
+    A -> A: formTroop(list of division distributions, List<UnitVo>))
+end
+A -> A: created troops = List<TroopEntity>
+loop forEach(TroopEntity)
+    alt TroopRepository
+        A -> D: insert
+        D -> A: id
+    end
+end
+alt TroopEntity2VoConverter
+    A -> A: convert List<TroopEntity> to List<TroopVo>
+end
+alt TroopController
+    A -> U: serialized JSON array of troop details
+end
+
+@enduml

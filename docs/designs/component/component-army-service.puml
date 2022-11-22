@@ -1,0 +1,40 @@
+@startuml
+
+title "Component - Empire Castle - Army Service"
+
+left to right direction
+
+node "Army Service" {
+
+    [Army Error Handler] as armyErrorHandler
+    [Soldier Service Client] as soldierServiceClient
+
+    frame "Troop API" {
+
+        [Troop Controller] as troopController
+        [Troop Service] as troopService
+        [Troop Maker] as troopMaker
+        [Troop Form Validator] as troopValidator
+        [Troop Entity 2 Vo Converter] as troopEntity2VoConverter
+        [Troop Repository] as troopRepository
+
+        troopController ..> troopService
+        troopService ..> soldierServiceClient
+        troopService ..> troopValidator
+        troopService ..> troopEntity2VoConverter
+        troopService ..> troopMaker
+        troopService ..> troopRepository
+
+        troopController -right-> armyErrorHandler
+        troopService -right-> armyErrorHandler
+
+    }
+
+}
+
+TroopVo <.. troopController
+TroopForm ..> troopController
+armyErrorHandler ..> ErrorVO
+soldierServiceClient ..> UnitAPI
+
+@enduml

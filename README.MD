@@ -47,7 +47,11 @@
 9. Execute `docker-compose -f stack-3.application.yml up` at the location to start all the business service containers for the microservice ecosystem
 10. Wait for all the web service containers to become available . Verify in Eureka server's dashboard if the following services are listed as UP: `GATEWAY-SERVICE, SOLDIER-SERVICE, ARMY-SERVICE`
 11. Open your browser and navigate to `http://localhost:11001/soldier/swagger-ui.html` to access the OpenAPI documentation console for the soldier-service
-12. Execute the REST APIs as per the functionality of the system. Refer to the `FEATURES` section to get an idea of the functionality of the system.
+12. Execute the API endpoint `POST /unit` once with `name: spearmen` to create soldier unit spearmen
+13. Execute the API endpoint `POST /unit` twice with `name: swordsmen` to create soldier unit swordsmen
+14. Execute the API endpoint `POST /unit` thrice with `name: archers` to create soldier unit archers
+15. Open your browser and navigate to `http://localhost:17001/army/swagger-ui.html` to access the OpenAPI documentation console for the army-service
+16. Execute the API endpoint `POST /troop` once with `strength: <integer value>` to create army with the required strength as many times as you like
 
 ---
 ### STEPS TO STOP - DOCKER APPROACH
@@ -66,18 +70,15 @@
 
 ---
 ### ARCHITECTURE
-[//]: # [Click here to see](https://i.ibb.co/6RW1HRQ/s3export-tool-architecture.png)
-![Click here to see](scripts/designs/deployment/s3export-tool-architecture.png)
+![Click here to see](out/docs/designs/deployment/empire-castle-architecture.png)
 
 ---
 ### COMPONENTS
-[//]: # [army-service](https://i.ibb.co/x3wrwLs/component-download-service-Component-S3-EXPORT-Download-Service.png)
-![army-service](scripts/designs/component/component-download-service-Component___S3EXPORT_Download_Service.png)
+![army-service](out/docs/designs/component/component-army-service/component-army-service.png)
 
 ---
 ### BUSINESS FLOWS SEQUENCES
-[//]: # [Create army with troop strength](https://i.ibb.co/FY5KdG8/sequence-download-latest-kunde-auftraege-data-by-country-as-csv-Download-latest-Kunde-Auftraege-data.png)
-![Create army with troop strength](scripts/designs/sequence/sequence-download-latest-kunde-auftraege-data-by-country-as-csv-Download_latest_Kunde_Auftraege_data_by_country_as_CSV.png)
+![Create army with troop strength](out/docs/designs/sequence/sequence-create-army-with-troop-strength/sequence-create-army-with-troop-strength.png)
 
 ---
 ### PROJECT DESCRIPTION
