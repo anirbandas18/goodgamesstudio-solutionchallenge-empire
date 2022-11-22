@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+
+  naming-service:
+    image: empire/naming:1.0-SNAPSHOT
+    container_name: naming-service
+    hostname: naming-service
+    restart: on-failure
+    ports:
+      - "8761:8761"
+    environment:
+      - LOGSTASH_ENABLED=false
+      - LOGBACK_LOGGING_LEVEL=info
+      - LOGSTASH_HOST=localhost
+      - LOGSTASH_PORT=4560
+      - PORT=8761
+
+  configuration-service:
+    image: empire/configuration:1.0-SNAPSHOT
+    container_name: configuration-service
+    hostname: configuration-service
+    restart: on-failure
+    ports:
+      - "8888:8888"
+    environment:
+      - PORT=8888
+      - LOGSTASH_ENABLED=false
+      - LOGBACK_LOGGING_LEVEL=info
+      - LOGSTASH_HOST=localhost
+      - LOGSTASH_PORT=4560
+      - EUREKA_CLIENT_ENABLED=false
+      - EUREKA_HOST=naming-service
+      - EUREKA_PORT=8761
